@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { CreatePost } from "~/app/_components/create-post";
 import { api } from "~/trpc/server";
+import { SignInButton } from "@clerk/nextjs";
 
 export default async function Home() {
   const hello = await api.post.hello({ text: "from tRPC" });
@@ -41,7 +42,7 @@ export default async function Home() {
             {hello ? hello.greeting : "Loading tRPC query..."}
           </p>
         </div>
-
+        <SignInButton />
         <CrudShowcase />
       </div>
     </main>
