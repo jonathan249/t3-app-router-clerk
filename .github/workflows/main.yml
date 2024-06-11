@@ -3,23 +3,26 @@ name: CI
 on: [push]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
+    lint:
+        runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
-        name: Use Node.js
-        with:
-          node-version: "14"
+        steps:
+            - uses: actions/checkout@v2
+              name: Use Node.js
+              with:
+                node-version: "14"
 
-      - name: Install dependencies
-        run: npm ci
+            - name: Install bun
+              run: npm install -g bun
 
-      - name: Format Code
-        run: npm run format
+            - name: Install dependencies
+              run: bun run ci
 
-      - name: Run linter
-        env:
-          CLERK_SECRET_KEY: ${{ env.CLERK_SECRET_KEY }}
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
-        run: npm run lint
+            - name: Format Code
+              run: bun run format
+
+            - name: Run linter
+              env:
+                CLERK_SECRET_KEY: ${{ env.CLERK_SECRET_KEY }}
+                NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+              run: bun run lint
