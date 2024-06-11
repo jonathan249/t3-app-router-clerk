@@ -23,6 +23,7 @@ jobs:
 
             - name: Run linter
               env:
-                CLERK_SECRET_KEY: ${{ env.CLERK_SECRET_KEY }}
-                NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+                CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+                NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+                DATABASE_URL: ${{ secrets.DATABASE_URL }}
               run: bun run lint
